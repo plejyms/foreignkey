@@ -1,0 +1,49 @@
+{% extends 'nav1.html' %}
+{% block content %}
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Show Student Details</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Age</th>
+                        <th>Joining Date</th>
+                        <th>Course</th>
+                        <th>Course Fee</th>
+                        <th>Action</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    {% for s in students %}
+                    <tr>
+                        <td>{{ s.student_name }}</td>
+                        <td>{{ s.student_address }}</td>
+                        <td>{{ s.age }}</td>
+                        <td>{{ s.joining_date }}</td>
+                        <td>{{ s.Course.coursename }}</td>
+                        <td>{{ s.Course.coursefee }}</td>
+                        <td>
+                            <a href="{% url 'editpage' s.id %}" 
+                               class="btn btn-primary btn-sm">Edit</a>
+                            <a href="{% url 'deletepage' s.id %}" 
+                               class="btn btn-danger btn-sm" 
+                               onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}
